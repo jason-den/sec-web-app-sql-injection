@@ -1,0 +1,22 @@
+{
+  "name": "demo_sql_injection",
+  "version": "0.1.0",
+  "description": "Demostration of SQL injection. Example is based on ExpressJS and MySQL",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "SQL",
+    "injection",
+    "ExpressJS",
+    "MySQL"
+  ],
+  "author": "Jason Zheng",
+  "license": "MIT"
+}

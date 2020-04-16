@@ -10,13 +10,11 @@ readMany = async (req, res, next) => {
     const { first_name } = req.body;
     if (!first_name)
       throw { httpCode: 500, message: "req.body.first_name is required!" };
-    console.log("User request recieved.", `first_name: ${first_name}`);
 
-    // DANGEROUS!
-    // Generating query string directly base on user input can be injected!
-    const queryString = `select * from employees where first_name like '%${first_name}%'`;
-
-    connection.query(queryString, (error, results, _) => {
+    // This looks similar to prepared statements in MySQL, however it really just uses the same connection.escape() method internally.
+    // read more: https://www.npmjs.com/package/mysql
+    const queryString = `select * from employees where first_name like ?`;
+    connection.query(queryString, [first_name], (error, results, _) => {
       if (error) return next(error);
       res.json({ data: results });
     });

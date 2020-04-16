@@ -1,19 +1,10 @@
 const route = require("express").Router();
 const connection = require("./connection");
 
-// Filter out sensitive info. You can add more filter-out field as fit.
-present = (employees) => {
-  return employees.map((e) => {
-    const { hashedPassword, ...presentable } = e;
-    return presentable;
-  });
-};
-
 /*
 Example:
-  req.body.query { name: "Andy" }
+  req.body.query { first_name: "Andy" }
 */
-
 readMany = async (req, res, next) => {
   try {
     const { first_name } = req.body;
@@ -27,8 +18,7 @@ readMany = async (req, res, next) => {
 
     connection.query(queryString, (error, results, _) => {
       if (error) return next(error);
-
-      res.json({ data: present(results[0]) });
+      res.json({ data: results });
     });
     // return res.json({ data: present(rows) }); // row[0] is better! Just want to make this
   } catch (error) {
